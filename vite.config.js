@@ -37,6 +37,7 @@ export default defineConfig({
   resolve: {
     alias: {
       'lib': resolve(__dirname, 'lib'),
+      'date-fns': require.resolve('date-fns')
     },
   },
   define: {
