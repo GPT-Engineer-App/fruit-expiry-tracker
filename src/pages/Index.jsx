@@ -11,7 +11,6 @@ import {
   Heading,
   Container
 } from '@chakra-ui/react';
-import { addDays, format } from 'date-fns';
 
 const fruitShelfLife = {
   bananas: 7,
@@ -27,8 +26,8 @@ const Index = () => {
   const calculateExpirationDate = () => {
     const shelfLife = fruitShelfLife[fruitType];
     const purchase = new Date(purchaseDate);
-    const expiration = addDays(purchase, shelfLife);
-    setExpirationDate(format(expiration, 'PPP'));
+    const expiration = new Date(purchase.setDate(purchase.getDate() + shelfLife));
+    setExpirationDate(expiration.toDateString());
   };
 
   return (
