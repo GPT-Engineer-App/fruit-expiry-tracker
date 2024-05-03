@@ -1,15 +1,61 @@
-// Complete the Index page component here
-// Use chakra-ui
-import { Button } from "@chakra-ui/react"; // example
-import { FaPlus } from "react-icons/fa"; // example - use react-icons/fa for icons
+import React, { useState } from 'react';
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Select,
+  VStack,
+  Text,
+  Heading,
+  Container
+} from '@chakra-ui/react';
+import { addDays, format } from 'date-fns';
+
+const fruitShelfLife = {
+  bananas: 7,
+  apples: 30,
+  strawberries: 5
+};
 
 const Index = () => {
-  // TODO: Create the website here!
+  const [fruitType, setFruitType] = useState('');
+  const [purchaseDate, setPurchaseDate] = useState('');
+  const [expirationDate, setExpirationDate] = useState('');
+
+  const calculateExpirationDate = () => {
+    const shelfLife = fruitShelfLife[fruitType];
+    const purchase = new Date(purchaseDate);
+    const expiration = addDays(purchase, shelfLife);
+    setExpirationDate(format(expiration, 'PPP'));
+  };
+
   return (
-    <Button>
-      Hello world! <FaPlus />
-    </Button>
-  ); // example
+    <Container maxW="container.md" py={10}>
+      <VStack spacing={8}>
+        <Heading>Track Fruit Expiration</Heading>
+        <FormControl>
+          <FormLabel htmlFor='fruit-type'>Fruit Type</FormLabel>
+          <Select id='fruit-type' placeholder='Select fruit' onChange={(e) => setFruitType(e.target.value)}>
+            <option value='bananas'>Bananas</option>
+            <option value='apples'>Apples</option>
+            <option value='strawberries'>Strawberries</option>
+          </Select>
+        </FormControl>
+        <FormControl>
+          <FormLabel htmlFor='purchase-date'>Purchase Date</FormLabel>
+          <Input id='purchase-date' type='date' onChange={(e) => setPurchaseDate(e.target.value)} />
+        </FormControl>
+        <Button colorScheme='blue' onClick={calculateExpirationDate}>Calculate Expiration Date</Button>
+        {expirationDate && (
+          <Box p={4} bg='gray.100' borderRadius='md'>
+            <Text fontSize='lg'>Estimated Expiration Date: {expirationDate}</Text>
+          </Box>
+        )}
+      </VStack>
+    </Container>
+  );
 };
 
 export default Index;
