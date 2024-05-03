@@ -5,12 +5,13 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Select,
   VStack,
   Text,
   Heading,
-  Container
+  Container,
+  HStack
 } from '@chakra-ui/react';
+import { FaApple, FaBanana, FaStrawberry } from 'react-icons/fa';
 
 const fruitShelfLife = {
   bananas: 7,
@@ -35,12 +36,11 @@ const Index = () => {
       <VStack spacing={8}>
         <Heading>Track Fruit Expiration</Heading>
         <FormControl>
-          <FormLabel htmlFor='fruit-type'>Fruit Type</FormLabel>
-          <Select id='fruit-type' placeholder='Select fruit' onChange={(e) => setFruitType(e.target.value)}>
-            <option value='bananas'>Bananas</option>
-            <option value='apples'>Apples</option>
-            <option value='strawberries'>Strawberries</option>
-          </Select>
+          <HStack spacing={4}>
+            <Button leftIcon={<FaBanana />} onClick={() => setFruitType('bananas')} colorScheme='yellow'>Bananas</Button>
+            <Button leftIcon={<FaApple />} onClick={() => setFruitType('apples')} colorScheme='red'>Apples</Button>
+            <Button leftIcon={<FaStrawberry />} onClick={() => setFruitType('strawberries')} colorScheme='pink'>Strawberries</Button>
+          </HStack>
         </FormControl>
         <FormControl>
           <FormLabel htmlFor='purchase-date'>Purchase Date</FormLabel>
