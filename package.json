@@ -31,7 +31,7 @@
         "react-icons": "^4.12.0",
         "react-router-dom": "^6.20.1",
         "toml": "^3.0.0",
-        "date-fns": "^2.29.3"
+        "date-fns": "^2.30.0"
     },
     "prettier": {
         "printWidth": 99999999
