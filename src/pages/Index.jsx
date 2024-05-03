@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { format } from 'date-fns';
 import {
   Box,
   Button,
@@ -20,7 +21,7 @@ const fruitShelfLife = {
 
 const Index = () => {
   const [fruitType, setFruitType] = useState('');
-  const [purchaseDate, setPurchaseDate] = useState('');
+  const [purchaseDate, setPurchaseDate] = useState(format(new Date(), 'yyyy-MM-dd'));
   const [expirationDate, setExpirationDate] = useState('');
 
   const calculateExpirationDate = () => {
@@ -44,7 +45,7 @@ const Index = () => {
         </FormControl>
         <FormControl>
           <FormLabel htmlFor='purchase-date'>Purchase Date</FormLabel>
-          <Input id='purchase-date' type='date' onChange={(e) => setPurchaseDate(e.target.value)} />
+          <Input id='purchase-date' type='date' value={purchaseDate} onChange={(e) => setPurchaseDate(e.target.value)} />
         </FormControl>
         <Button colorScheme='blue' onClick={calculateExpirationDate}>Calculate Expiration Date</Button>
         {expirationDate && (
